@@ -18,7 +18,7 @@ Running the initial nmap scan showed 9 open ports on the target machine
 - **Port 21**: Microsoft ftpd
 - **Port 80**: Microsoft IIS httpd 7.5
 
-[Initial scan.png]
+![initial_scan](./Screenshots/Initial scan.png)
 
 - **Full Scan**
 Now let run a scan on all port to see if there are any other entry points.
