@@ -29,7 +29,8 @@ Now let run a scan on all port to see if there are any other entry points.
 		
 
 We get the same results from the full scan.
-[full scan]
+
+![full scan](https://github.com/benoitbeaulieu-ls/htb_devel/blob/master/Screenshots/inital_scan.png)
 
 - **UDP Scan**
 Now to be extra thorough I'm going to run a UDP scan.
@@ -38,7 +39,7 @@ Now to be extra thorough I'm going to run a UDP scan.
 	`sudo nmap -sU -T4 -O -p- -oA devel_udp 10.10.10.40`
 		- `-sU`: UDP scan
 
-[udp_scan.png]
+The UDP scan was still running after 5 hours. If we don't gain a foothold in the proceeding steps we will attempt the UDP scan again.
 
 --------------------------------------------
 --------------------------------------------
@@ -48,21 +49,21 @@ We saw in our initial scan that the server allows annonymous login on the FTP se
 
 `ftp 10.10.10.5`
 
-[ftp_login.png]
+![ftp login](https://github.com/benoitbeaulieu-ls/htb_devel/blob/master/Screenshots/ftp_login.png)
 
 We can even list the files in the current directory.
 
-[ftp_directories.png]
+![ftp directories](https://github.com/benoitbeaulieu-ls/htb_devel/blob/master/Screenshots/ftp_directories.png)
 
 Let's see if we visit these files on the browser
 
-[browser.png]
+![browser](https://github.com/benoitbeaulieu-ls/htb_devel/blob/master/Screenshots/browser.png)
 
 This leads me to believe that the ftp server is uploading files to the root directory of the web server.
 
 I created a test file to see if I was able to upload it to the server and it was succesful.
 
-[test_file,png]
+![test file](https://github.com/benoitbeaulieu-ls/htb_devel/blob/master/Screenshots/test_file.png)
 
 We should be able to get a shell with this knowledge.
 
@@ -74,7 +75,7 @@ We need to generate a payload in order to upload it to the FTP server and execut
 
 Now lets put the shell on the server
 
-[put_shell.png]
+![put shell](https://github.com/benoitbeaulieu-ls/htb_devel/blob/master/Screenshots/put_shell.png)
 
 Now lets set up out listener
 
@@ -82,13 +83,13 @@ Now lets set up out listener
 
 Now we can execute the file in the browser. We got our shell!
 
-[reverse_shell.png]
+![reverse shell](https://github.com/benoitbeaulieu-ls/htb_devel/blob/master/Screenshots/reverse_shell.png)
 
 # Priviledge Escalation
 
 We have our shell as the user "iis apppool\web". We don't have much priviledge with this account so we're going to need to elevate our priviledges.
 
-[user_shell.png]
+![user shell](https://github.com/benoitbeaulieu-ls/htb_devel/blob/master/Screenshots/user_shell.png)
 
 Let's get some more information about this device.
 
@@ -100,13 +101,13 @@ Let's Google for exploits on the windows version "Microsoft Windows 7 build 7600
 
 We found one on exploit db so we should be able to find it in searchploit by searching the vulnerability name.
 
-[priv_esc.png]
+![priv esc](https://github.com/benoitbeaulieu-ls/htb_devel/blob/master/Screenshots/priv_esc.png)
 
 `searchsploit -m 40564`
 
 Now that we have it copied to our directory we need to compile it with the instructions below
 
-[compile_instructions.png]
+![compile instructions](https://github.com/benoitbeaulieu-ls/htb_devel/blob/master/Screenshots/compile_instructions.png)
 
 `sudo apt install mingw-w64 `
 
@@ -124,16 +125,16 @@ Since there is no netcat installed on the machine, let use some powershell to gr
 
 After running that we finally hve the exe file on our target machine 
 
-[exe_ontarget.png]
+![exe ontarget](https://github.com/benoitbeaulieu-ls/htb_devel/blob/master/Screenshots/exe_ontarget.png)
 
 After executing the file we have admin priviledges!
 
-[admin_priv.png]
+![admin priv](https://github.com/benoitbeaulieu-ls/htb_devel/blob/master/Screenshots/admin_priv.png)
 
 Navigating to babis desktop directory we got the user flag
 
-[user_flag.png]
+![user flag](https://github.com/benoitbeaulieu-ls/htb_devel/blob/master/Screenshots/user_flag.png)
 
 Navigating to the administrators desktop we got the root directory.
 
-[root_flag.png]
+![root flag](https://github.com/benoitbeaulieu-ls/htb_devel/blob/master/Screenshots/root_flag.png)
