@@ -4,7 +4,7 @@ The machine I'm going to attempt to exploit is a Windows machine called "Devel".
 
 # Reconnaissance 
 
-The IP that is associated with the machine is 10.10.10.5. I'm going to start by running a few nmap scan to determine if I can find a point of entry. 
+The IP that is associated with the machine is 10.10.10.5. I'm going to start by running a few nmap scans to determine if I can find a point of entry. 
 ### ****Scanning****
 
 - **Initial Scan**
@@ -58,7 +58,7 @@ We can even list the files in the current directory.
 
 ![ftp directories](https://github.com/benoitbeaulieu-ls/htb_devel/blob/master/Screenshots/ftp_directories.png)
 
-Let's see if we visit these files on the browser
+Let's see if we can visit these files on the browser
 
 ![browser](https://github.com/benoitbeaulieu-ls/htb_devel/blob/master/Screenshots/browser.png)
 
